@@ -34,15 +34,23 @@ class App extends React.Component<Props, State> {
     const { name, dt, main, weather }: Partial<WeatherResponse> = this.props.store!.weather;
     const temp = main && main.temp;
     const iconNumber = weather && weather[0].icon;
-    
-    return (
-      <div className="App">
-        <p>{name}</p>
-        {iconNumber && <img src={`https://openweathermap.org/img/w/${iconNumber}.png`} />}
-        <p>{temp}°C</p>
-        <p>Issued: {dt}</p>
-      </div>
-    );
+
+    if (this.props.store!.loadingWeather) {
+      return (
+        <div className="App">
+          <p>Loading...</p>
+        </div>
+      );
+    } else {
+      return (
+        <div className="App">
+          <p>{name}</p>
+          {iconNumber && <img height="50px" width="50px" src={`https://openweathermap.org/img/w/${iconNumber}.png`} />}
+          <p>{temp}°C</p>
+          <p>Issued: {dt}</p>
+        </div>
+      );
+    }    
   }
 }
 

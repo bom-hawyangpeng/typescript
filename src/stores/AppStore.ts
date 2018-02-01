@@ -13,6 +13,7 @@ type Position = {
 export default class AppStore {
 
   @observable position: Position;
+  @observable loadingWeather: boolean = false;
   @observable weather = {};
 
   getPosition(): Promise<Position> {
@@ -33,13 +34,15 @@ export default class AppStore {
     });
   }
 
-  @action async getWeather() {
-    const pos = this.position || await this.getPosition();
+  @action async getWeather(): Promise<void> {
+    this.loadingWeather = true;
+    const pos: Position = this.position || await this.getPosition();
     
-    const latitude = pos.latitude;
-    const longitude = pos.longitude;
+    const latitude: number = pos.latitude;
+    const longitude: number = pos.longitude;
     
     const response = await fetch(`${API_URL}weather?lat=${latitude}&lon=${longitude}&units=metric&APPID=${API_KEY}`);
     this.weather = await response.json();
+    this.loadingWeather = false;
   }
 }
