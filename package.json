@@ -1,6 +1,7 @@
 {
   "name": "typescript",
   "version": "0.1.0",
+  "homepage": "https://bom-hawyangpeng.github.io/typescript",
   "private": true,
   "dependencies": {
     "autoprefixer": "7.1.2",

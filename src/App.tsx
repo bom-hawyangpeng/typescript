@@ -27,7 +27,7 @@ class App extends React.Component<Props, State> {
 
   componentDidMount() {
     const { store } = this.props;
-    store!.getPosition();    
+    store!.getWeather();    
   }
 
   render() {
@@ -38,7 +38,7 @@ class App extends React.Component<Props, State> {
     return (
       <div className="App">
         <p>{name}</p>
-        {iconNumber && <img src={`http://openweathermap.org/img/w/${iconNumber}.png`} />}
+        {iconNumber && <img height="50px" width="50px" src={`http://openweathermap.org/img/w/${iconNumber}.png`} />}
         <p>{temp}°C</p>
         <p>Issued: {dt}</p>
       </div>
