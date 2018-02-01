@@ -38,7 +38,7 @@ class App extends React.Component<Props, State> {
     return (
       <div className="App">
         <p>{name}</p>
-        {iconNumber && <img height="50px" width="50px" src={`http://openweathermap.org/img/w/${iconNumber}.png`} />}
+        {iconNumber && <img src={`https://openweathermap.org/img/w/${iconNumber}.png`} />}
         <p>{temp}°C</p>
         <p>Issued: {dt}</p>
       </div>
