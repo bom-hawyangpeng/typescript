@@ -31,7 +31,8 @@ class App extends React.Component<Props, State> {
   }
 
   render() {
-    const { name, dt, main, weather }: Partial<WeatherResponse> = this.props.store!.weather;
+    const store = this.props.store!;
+    const { name, dt, main, weather }: Partial<WeatherResponse> = store.weather;
     const temp = main && main.temp;
     const iconNumber = weather && weather[0].icon;
 

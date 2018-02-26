@@ -14,12 +14,18 @@ export default class AppStore {
 
   @observable position: Position;
   @observable loadingWeather: boolean = false;
-  @observable weather = {};
+  @observable weather: Object = {};
 
   getPosition(): Promise<Position> {
     return new Promise((resolve, reject) => {
       if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition((position) => {
+        const options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+        };
+        navigator.geolocation.getCurrentPosition(
+        (position) => {
           const pos = {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
@@ -27,7 +33,11 @@ export default class AppStore {
 
           this.position = pos;       
           resolve(pos);
-        });
+        },
+        (error) => {
+          console.log(error);
+        }, 
+        options);
       } else {
         reject();
       }
